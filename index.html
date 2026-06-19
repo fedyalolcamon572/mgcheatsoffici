@@ -6,13 +6,14 @@
     <title>mgexecutor — Панель Автоматизации Rublox</title>
     <style>
         :root {
-            --bg-main: #0f111a;
-            --bg-card: #161925;
+            --bg-main: #0a0a0f;
+            --bg-card: rgba(22, 25, 37, 0.7);
             --accent: #00ffaa;
             --accent-hover: #00cc88;
-            --text-main: #f0f2f5;
-            --text-muted: #a0aec0;
-            --code-bg: #1e2235;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --code-bg: #11131c;
+            --gradient: linear-gradient(135deg, #00ffaa 0%, #00b8ff 100%);
         }
 
         body {
@@ -22,92 +23,132 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 170, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 184, 255, 0.05), transparent 25%);
+            background-attachment: fixed;
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
+            max-width: 850px;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+            font-size: 42px;
+            margin-bottom: 15px;
             color: #ffffff;
             letter-spacing: 1px;
         }
 
         header h1 span {
-            color: var(--accent);
-            text-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 170, 0.2);
         }
 
         header p {
             color: var(--text-muted);
             font-size: 18px;
             margin: 0;
+            font-weight: 300;
         }
 
         .card {
-            background-color: var(--bg-card);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 255, 170, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 255, 170, 0.1);
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 22px;
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #ffffff;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
         }
 
         p {
             margin: 0 0 15px 0;
             color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .feature-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-image:hover {
+            transform: scale(1.02);
         }
 
         .btn-download {
             display: block;
-            background-color: var(--accent);
-            color: #05050a;
+            background: var(--gradient);
+            color: #000000;
             text-decoration: none;
             text-align: center;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.2);
-            margin: 30px 0;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 170, 0.3);
+            margin: 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-download:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 170, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.5);
+            filter: brightness(1.1);
         }
 
         .step {
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 3px solid var(--accent);
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(90deg, rgba(0,255,170,0.05) 0%, transparent 100%);
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 8px 8px 0;
         }
 
         .step-title {
             font-weight: bold;
             color: #ffffff;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 18px;
         }
 
         ol {
@@ -116,49 +157,88 @@
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--text-muted);
         }
 
         li strong {
             color: #ffffff;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         .link-help {
             color: var(--accent);
             text-decoration: none;
             border-bottom: 1px dashed var(--accent);
+            transition: all 0.2s;
         }
 
         .link-help:hover {
             color: #ffffff;
             border-bottom-color: #ffffff;
+            text-shadow: 0 0 8px rgba(0,255,170,0.5);
+        }
+
+        .key-badge {
+            color: #111; 
+            background: var(--accent); 
+            padding: 2px 8px; 
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: monospace;
         }
 
         .script-box {
             background-color: var(--code-bg);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 20px;
             margin-top: 15px;
             overflow-x: auto;
+            border: 1px solid rgba(0,255,170,0.1);
+            position: relative;
+        }
+
+        .script-box::before {
+            content: "JS";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0,255,170,0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 0 10px 0 10px;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         code {
-            font-family: "Consolas", "Courier New", monospace;
-            color: #00ffaa;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            color: #e2e8f0;
             font-size: 14px;
             white-space: pre;
         }
 
+        .cmd-func { color: #00b8ff; }
+        .cmd-kw { color: #ff55aa; }
+        .cmd-str { color: #00ffaa; }
+        .cmd-comment { color: #64748b; font-style: italic; }
+
         .script-desc {
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 10px;
             color: var(--text-muted);
         }
 
         .warning-text {
-            color: #ff6b6b;
+            color: #ff4466;
             font-weight: bold;
+            background: rgba(255, 68, 102, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ff4466;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -167,22 +247,25 @@
 <div class="container">
     <header>
         <h1>! <span>mgexecutor</span> v42.0</h1>
-        <p>Среда исполнения JavaScript для вселенной Rublox</p>
+        <p>Продвинутая среда исполнения JavaScript для вселенной Rublox</p>
     </header>
 
     <div class="card">
         <h2>Что такое mgexecutor?</h2>
         <p>
             Это полноценный внутриигровой инструмент автоматизации. В отличие от простых читов, он предоставляет вам 
-            <strong>настоящую среду разработки (IDE) на языке JavaScript</strong> прямо внутри запущенной игры.
+            настоящую среду разработки (IDE) на языке JavaScript прямо внутри запущенной игры.
         </p>
+        
+        <img src="mgexecutorvid.png" alt="Интерфейс mgexecutor в игре" class="feature-image">
+        
         <p>
             Вы можете писать собственные JS-скрипты так же, как разработчики в официальной студии Rublox, перехватывать потоки 
             данных и управлять действиями своего персонажа: активировать полёт, телепортироваться, настраивать супер-скорость или подсвечивать объекты.
         </p>
     </div>
 
-    <a href="mgexecutor-42.0.js" class="btn-download" download>Скачать скрипт mgexecutor v42.0</a>
+    <a href="mgexecutor-42.0.js" class="btn-download" download>Скачать mgexecutor v42.0</a>
 
     <div class="card">
         <h2> Пошаговая инструкция по установке</h2>
@@ -190,6 +273,7 @@
         <div class="step">
             <div class="step-title">Шаг 1. Включение режима разработчика</div>
             <p>Чтобы браузер разрешил установку сторонних скриптов, откройте настройки браузера -> <strong>Расширения</strong> и в правом верхнем углу включите тумблер <strong>«Режим разработчика»</strong>.</p>
+            <img src="razrab.png" alt="Включение режима разработчика в браузере" class="feature-image" style="max-width: 80%; margin: 10px auto; display: block;">
         </div>
 
         <div class="step">
@@ -200,70 +284,64 @@
         <div class="step">
             <div class="step-title">Шаг 3. Добавление mgexecutor</div>
             <ol>
-                <li>Нажмите на синюю кнопку скачивания выше, чтобы загрузить файл <code>mgexecutor-42.0.js</code>.</li>
-                <li>Откройте скачанный файл через любой текстовый редактор (Блокнот) и <strong>полностью скопируйте всё его содержимое</strong> (Ctrl+A -> Ctrl+C).</li>
-                <li>Нажмите на иконку Tampermonkey в браузере в разделе расширения и выберите <strong>«Создать новый скрипт...»</strong>.</li>
-                <li>Полностью сотрите весь дефолтный текст в открывшемся редакторе Tampermonkey, <strong>вставьте скопированный код</strong> экзекутора и нажмите <strong>Файл -> Сохранить</strong>.</li>
+                <li>Нажмите на зеленую кнопку скачивания выше, чтобы загрузить файл <strong>mgexecutor-42.0.js</strong>.</li>
+                <li>Откройте скачанный файл через любой текстовый редактор (например, Блокнот) и <strong>полностью скопируйте всё его содержимое</strong> (Ctrl+A -> Ctrl+C).</li>
+                <li>Нажмите на иконку Tampermonkey в панели расширений браузера и выберите <strong>«Создать новый скрипт...»</strong>.</li>
+                <li>Полностью сотрите весь базовый текст в открывшемся редакторе, <strong>вставьте скопированный код</strong> экзекутора и нажмите <strong>Файл -> Сохранить</strong>.</li>
             </ol>
         </div>
 
         <div class="step">
             <div class="step-title">Шаг 4. Запуск в игре</div>
-            <p>Перезапустите вкладку с игрой Rublox. После входа на игровую карту нажмите на клавиатуре клавишу <span style="color:#fff; background:#444; padding:2px 6px; border-radius:4px;">Insert</span> или клавишу <span style="color:#fff; background:#444; padding:2px 6px; border-radius:4px;">~</span> (буква Ё). На экране появится стильный неоновый интерфейс экзекутора!</p>
+            <p>Перезапустите вкладку с игрой Rublox. После входа на игровую карту нажмите на клавиатуре клавишу <span class="key-badge">Insert</span> или <span class="key-badge">~</span> (Ё). На экране появится стильный неоновый интерфейс экзекутора!</p>
         </div>
         
         <p class="warning-text">⚠️ Важно: Скачивайте обновления только с этой официальной страницы, чтобы гарантировать безопасность ваших личных данных и игрового аккаунта.</p>
     </div>
 
     <div class="card">
-        <h2>Примеры готовых скриптов для ввода в консоль</h2>
+        <h2>База скриптов (Вводить в консоль)</h2>
         <p>Скопируйте любой из этих скриптов, вставьте в текстовое поле mgexecutor в игре и нажмите кнопку <strong>EXECUTE TO WORKERS</strong>.</p>
 
         <h3>1. FlyHack & UFO (Полёт)</h3>
-        <div class="script-desc">Движок игры имеет встроенный режим НЛО (setUfoMode), который отключает стандартную гравитацию для персонажа и позволяет ему летать во все стороны.</div>
+        <div class="script-desc">Отключает стандартную гравитацию для персонажа и позволяет ему летать во все стороны.</div>
         <div class="script-box">
-<code>
-game.player.setUfoMode(true);
+<code><span class="cmd-comment">// Активируем режим НЛО</span>
+<span class="cmd-func">game.player.setUfoMode</span>(<span class="cmd-kw">true</span>);
     
-game.player.setShipMode(false);
+<span class="cmd-func">game.player.setShipMode</span>(<span class="cmd-kw">false</span>);
+<span class="cmd-func">game.player.setSpeed</span>(30); 
 
-game.player.setSpeed(30); 
-
-console.log("[Hack] Режим полета активирован! Управление на W,A,S,D + Пробел/Crouch");</code>
+<span class="cmd-func">console.log</span>(<span class="cmd-str">"[Hack] Режим полета активирован! Управление на W,A,S,D + Пробел/Crouch"</span>);</code>
         </div>
 
         <br>
         <h3>2. SpeedHack (Супер-скорость + Мега-прыжок)</h3>
-        <div class="script-desc">Этот скрипт мгновенно разгоняет твоего персонажа до безумных скоростей, увеличивает силу прыжка и активирует легальный «двойной прыжок».</div>
+        <div class="script-desc">Разгоняет персонажа до безумных скоростей, увеличивает силу прыжка и активирует «двойной прыжок».</div>
         <div class="script-box">
-<code>
-game.player.setSpeed(60); 
-game.player.setJumpPower(35); 
+<code><span class="cmd-func">game.player.setSpeed</span>(60); 
+<span class="cmd-func">game.player.setJumpPower</span>(35); 
+<span class="cmd-func">game.player.setDoubleJump</span>(<span class="cmd-kw">true</span>); 
+<span class="cmd-func">game.player.setIceFriction</span>(0); 
 
-game.player.setDoubleJump(true); 
-
-game.player.setIceFriction(0); 
-
-console.log("[Hack] SpeedHack и JumpHack включены!");</code>
+<span class="cmd-func">console.log</span>(<span class="cmd-str">"[Hack] SpeedHack и JumpHack включены!"</span>);</code>
         </div>
 
         <br>
-        <h3>3. Noclip (Прохождение сквозь стены и блоки)</h3>
-        <div class="script-desc">Мы заставляем физический движок думать, что игрок может проходить сквозь абсолютно любые объекты.</div>
+        <h3>3. Noclip (Прохождение сквозь стены)</h3>
+        <div class="script-desc">Заставляет физический движок думать, что игрок может проходить сквозь любые объекты.</div>
         <div class="script-box">
-<code>
-if (typeof physics !== 'undefined' && physics.passThrough) {
-    physics.passThrough(true); 
-    console.log("[Hack] Noclip активирован. Вы можете ходить сквозь стены!");
-} else {
-    game.every(0.1, function() {
-        if (game.player.isKeyDown('w')) {
-            var pos = game.player.position;
-            var dir = game.player.forward;
-            move(pos.x + dir.x * 1.5, pos.y, pos.z + dir.z * 1.5);
+<code><span class="cmd-kw">if</span> (<span class="cmd-kw">typeof</span> physics !== <span class="cmd-str">'undefined'</span> && physics.passThrough) {
+    <span class="cmd-func">physics.passThrough</span>(<span class="cmd-kw">true</span>); 
+    <span class="cmd-func">console.log</span>(<span class="cmd-str">"[Hack] Noclip активирован. Вы можете ходить сквозь стены!"</span>);
+} <span class="cmd-kw">else</span> {
+    <span class="cmd-func">game.every</span>(0.1, <span class="cmd-kw">function</span>() {
+        <span class="cmd-kw">if</span> (<span class="cmd-func">game.player.isKeyDown</span>(<span class="cmd-str">'w'</span>)) {
+            <span class="cmd-kw">var</span> pos = game.player.position;
+            <span class="cmd-kw">var</span> dir = game.player.forward;
+            <span class="cmd-func">move</span>(pos.x + dir.x * 1.5, pos.y, pos.z + dir.z * 1.5);
         }
     });
-    console.log("[Hack] Альтернативный Noclip запущен.");
 }</code>
         </div>
 
@@ -271,19 +349,18 @@ if (typeof physics !== 'undefined' && physics.passThrough) {
         <h3>4. WallHack & ESP (Подсветка врагов)</h3>
         <div class="script-desc">Сканирует массив всех NPC/Монстров на карте и отрисовывает 2D маркеры с их HP поверх экрана.</div>
         <div class="script-box">
-<code>
-game.every(0.2, function() {
-    game.ui.clear();
+<code><span class="cmd-func">game.every</span>(0.2, <span class="cmd-kw">function</span>() {
+    <span class="cmd-func">game.ui.clear</span>();
     
-    if (typeof _npcs !== 'undefined' && _npcs.length > 0) {
-        _npcs.forEach(function(npc) {
-            if (npc.hp > 0) {
-                game.ui.set("wh_" + npc.id, "🔴 " + npc.name + " [" + Math.round(npc.hp) + " HP]", {
+    <span class="cmd-kw">if</span> (<span class="cmd-kw">typeof</span> _npcs !== <span class="cmd-str">'undefined'</span> && _npcs.length > 0) {
+        <span class="cmd-func">_npcs.forEach</span>(<span class="cmd-kw">function</span>(npc) {
+            <span class="cmd-kw">if</span> (npc.hp > 0) {
+                <span class="cmd-func">game.ui.set</span>(<span class="cmd-str">"wh_"</span> + npc.id, <span class="cmd-str">"🔴 "</span> + npc.name + <span class="cmd-str">" ["</span> + <span class="cmd-func">Math.round</span>(npc.hp) + <span class="cmd-str">" HP]"</span>, {
                     x: npc.x, 
                     y: npc.y + 2, 
                     z: npc.z,
-                    color: "#ff0055",
-                    fontSize: "14px"
+                    color: <span class="cmd-str">"#ff0055"</span>,
+                    fontSize: <span class="cmd-str">"14px"</span>
                 });
             }
         });
